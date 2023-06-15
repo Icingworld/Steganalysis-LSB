@@ -15,7 +15,7 @@ void LSB::LoadImg(const QString & path)
     img.load(path);
     width = img.width();
     height = img.height();
-    max = width * height;
+    max = width * height * 3 - 12;
 }
 
 void LSB::WriteImg(const QString & path)
@@ -45,6 +45,7 @@ void LSB::CoverPixel()
                 } else {
                     value[value.length()-1] =  coded[index];
                 }
+                list[t] = value;
                 index++;
             }
             bool n;
@@ -57,9 +58,13 @@ void LSB::CoverPixel()
     }
 }
 
-void LSB::SplitPixel()
+QString LSB::SplitPixel()
 {
-    raw = "";
+    QString head = "";
+    int len = 0;
+    bool flag = false;
+    QString decoded = "";
+    int index = 0;
     for (int i=0;i<width;i++) {
         for (int j=0;j<height;j++) {
             QRgb pixelValue = img.pixel(i, j);
@@ -72,11 +77,27 @@ void LSB::SplitPixel()
             list.append(QString::number(blue, 2));
             for (int t=0;t<3;t++) {
                 QString value = list[t];
-                raw += value[value.length() - 1];
+                if (index < 12)
+                {
+                    head += value[value.length() - 1];
+                } else if (!flag) {
+                    bool n;
+                    len = head.toInt(&n, 2);
+                    flag = true;
+                    if (len > 0)
+                    {
+                        decoded += value[value.length() - 1];
+                    }
+                } else if (index < 12 + len) {
+                    decoded += value[value.length() - 1];
+                } else {
+                    return decoded;
+                }
+                index++;
             }
         }
     }
-    qDebug() << raw.length();
+    return "";
 }
 
 void LSB::SetText(const QString & string)
@@ -84,16 +105,65 @@ void LSB::SetText(const QString & string)
     raw = string;
 }
 
+void LSB::SetCoded(const QString & string)
+{
+    coded = string;
+}
+
+QString LSB::GetDecoded()
+{
+    return decoded;
+}
+
+QImage LSB::GetImg()
+{
+    return img;
+}
+
+int LSB::GetMax()
+{
+    return max;
+}
+
 void LSB::Encode()
 {
     QByteArray utf8Bytes = raw.toUtf8();
-    temp = utf8Bytes.toHex();
-    qDebug() << temp;
+    QString binaryString;
+    for (char byte : utf8Bytes) {
+        binaryString += QString("%1").arg(static_cast<unsigned char>(byte), 8, 2, QLatin1Char('0'));
+    }
+    coded = binaryString;
+    int len = coded.length();
+    QString lens = QString::number(len, 2).rightJustified(12, '0');
+    coded = lens + coded;
 }
 
 void LSB::Decode()
 {
-    QByteArray hexBytes = QByteArray::fromHex(temp.toUtf8());
-    QString decodedString = QString::fromUtf8(hexBytes);
-    qDebug() << decodedString;
+    QByteArray utf8Data;
+    QStringList byteStrings;
+    int len = coded.length();
+    QString temp = "";
+    for (int i=0;i<(len/8);i++) {
+        temp += coded[8*i];
+        temp += coded[8*i+1];
+        temp += coded[8*i+2];
+        temp += coded[8*i+3];
+        temp += coded[8*i+4];
+        temp += coded[8*i+5];
+        temp += coded[8*i+6];
+        temp += coded[8*i+7];
+        byteStrings.append(temp);
+        temp = "";
+    }
+    for (const QString& byteString : byteStrings) {
+        bool ok;
+        int byteValue = byteString.toInt(&ok, 2);
+        if (ok) {
+            utf8Data.append(static_cast<char>(byteValue));
+        } else {
+            qWarning() << "Invalid binary string:" << byteString;
+        }
+    }
+    decoded = QString::fromUtf8(utf8Data);
 }

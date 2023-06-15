@@ -7,15 +7,214 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>600</height>
+    <height>518</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
-  <widget class="QMenuBar" name="menubar"/>
-  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="raw">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>50</y>
+      <width>331</width>
+      <height>280</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background:white;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="encrypt">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>50</y>
+      <width>331</width>
+      <height>280</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background:white;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>20</y>
+      <width>72</width>
+      <height>15</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>raw</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="text">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>380</y>
+      <width>618</width>
+      <height>87</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QTextEdit::disabled{background:white;color:black}</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="rawfile">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>346</y>
+      <width>238</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background:white</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="choose">
+    <property name="geometry">
+     <rect>
+      <x>291</x>
+      <y>343</y>
+      <width>81</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>...</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="save">
+    <property name="geometry">
+     <rect>
+      <x>671</x>
+      <y>343</y>
+      <width>81</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>save</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="button">
+    <property name="geometry">
+     <rect>
+      <x>671</x>
+      <y>380</y>
+      <width>81</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>encrypt</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="name">
+    <property name="geometry">
+     <rect>
+      <x>419</x>
+      <y>346</y>
+      <width>238</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit::disabled{background:white}</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="choose1">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>20</y>
+      <width>91</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>encrypt</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="choose2">
+    <property name="geometry">
+     <rect>
+      <x>610</x>
+      <y>20</y>
+      <width>91</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>decrypt</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="clear">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>473</y>
+      <width>41</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>clr</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="copy">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>473</y>
+      <width>41</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>copy</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="num">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>477</y>
+      <width>161</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>text to be encrypted</string>
+    </property>
+   </widget>
+  </widget>
  </widget>
  <resources/>
  <connections/>
