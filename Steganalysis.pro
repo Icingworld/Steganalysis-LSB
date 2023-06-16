@@ -21,7 +21,7 @@ FORMS += \
     mainwindow.ui
 
 TRANSLATIONS += \
-    PicEncryptor_zh_CN.ts
+    Steganalysis_zh_CN.ts
 CONFIG += lrelease
 CONFIG += embed_translations
 
@@ -35,3 +35,5 @@ RESOURCES += \
 
 DISTFILES += \
     logo.rc
+
+RC_FILE += logo.rc
