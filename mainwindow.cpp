@@ -22,7 +22,22 @@ MainWindow::~MainWindow()
 
 void MainWindow::ImgShow(QLabel * label, QImage img)
 {
-    label->setPixmap(QPixmap::fromImage(img));
+    qDebug() << img.width() << img.height();
+    qDebug() << label->width() << label->height();
+    QImage img1, img2;
+    if (img.width() > label->width())
+    {
+        img1 = img.scaled(label->width(), img.height() * (label->width() / static_cast<float>(img.width())));
+    } else {
+        img1 = img;
+    }
+    if (img1.height() > label->height())
+    {
+        img2 = img1.scaled(img1.width() * (label->height() / static_cast<float>(img1.height())), img1.height());
+    } else {
+        img2 = img1;
+    }
+    label->setPixmap(QPixmap::fromImage(img2));
     label->show();
 }
 
@@ -37,6 +52,9 @@ void MainWindow::Reset()
     ui->copy->setEnabled(false);
     ui->raw->clear();
     ui->encrypt->clear();
+    ui->rawfile->clear();
+    ui->name->clear();
+    ui->text->clear();
 }
 
 

@@ -15,7 +15,7 @@ void LSB::LoadImg(const QString & path)
     img.load(path);
     width = img.width();
     height = img.height();
-    max = width * height * 3 - 12;
+    max = (width * height * 3 - 12) / 8;
 }
 
 void LSB::WriteImg(const QString & path)
@@ -123,6 +123,16 @@ QImage LSB::GetImg()
 int LSB::GetMax()
 {
     return max;
+}
+
+int LSB::GetWidth()
+{
+    return width;
+}
+
+int LSB::GetHeight()
+{
+    return height;
 }
 
 void LSB::Encode()

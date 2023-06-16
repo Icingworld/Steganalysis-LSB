@@ -27,6 +27,8 @@ public:
     void SetText(const QString & string);
     void SetCoded(const QString & string);
     int GetMax();
+    int GetHeight();
+    int GetWidth();
     QImage GetImg();
     QString GetDecoded();
     void CoverPixel();
