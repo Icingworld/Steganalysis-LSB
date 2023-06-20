@@ -1,4 +1,4 @@
-﻿#include "mainwindow.h"
+#include "mainwindow.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -22,8 +22,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::ImgShow(QLabel * label, QImage img)
 {
-    qDebug() << img.width() << img.height();
-    qDebug() << label->width() << label->height();
     QImage img1, img2;
     if (img.width() > label->width())
     {
