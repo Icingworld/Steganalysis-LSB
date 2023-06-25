@@ -1,4 +1,4 @@
-﻿#ifndef LSB_H
+#ifndef LSB_H
 #define LSB_H
 
 #include <iostream>
@@ -7,6 +7,8 @@
 #include <QTextCodec>
 #include <QVector>
 #include <QDebug>
+
+enum TYPE {PNG, DEFAULT};
 
 class LSB
 {
@@ -31,7 +33,7 @@ public:
     int GetWidth();
     QImage GetImg();
     QString GetDecoded();
-    void CoverPixel();
+    void CoverPixel(int TYPE=DEFAULT);
     QString SplitPixel();
     void Encode();
     void Decode();

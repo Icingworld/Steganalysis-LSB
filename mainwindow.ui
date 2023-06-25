@@ -57,12 +57,12 @@
      <rect>
       <x>180</x>
       <y>20</y>
-      <width>72</width>
-      <height>15</height>
+      <width>51</width>
+      <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>raw</string>
+     <string>原图片</string>
     </property>
    </widget>
    <widget class="QTextEdit" name="text">
@@ -120,7 +120,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>save</string>
+     <string>保存</string>
     </property>
    </widget>
    <widget class="QPushButton" name="button">
@@ -133,7 +133,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>encrypt</string>
+     <string>加密</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="name">
@@ -159,7 +159,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>encrypt</string>
+     <string>加密</string>
     </property>
    </widget>
    <widget class="QCheckBox" name="choose2">
@@ -172,7 +172,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>decrypt</string>
+     <string>解密</string>
     </property>
    </widget>
    <widget class="QPushButton" name="clear">
@@ -185,7 +185,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>clr</string>
+     <string>清除</string>
     </property>
    </widget>
    <widget class="QPushButton" name="copy">
@@ -198,7 +198,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>copy</string>
+     <string>复制</string>
     </property>
    </widget>
    <widget class="QLabel" name="num">
@@ -211,7 +211,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>text to be encrypted</string>
+     <string>待加密密文</string>
     </property>
    </widget>
   </widget>

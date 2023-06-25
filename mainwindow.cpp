@@ -62,27 +62,27 @@ void MainWindow::Warning(const QString & string)
     messageBox.setWindowTitle("Warning");
     messageBox.setText(string);
     messageBox.setIcon(QMessageBox::Information);
-    messageBox.addButton("confirm", QMessageBox::AcceptRole);
+    messageBox.addButton("确认", QMessageBox::AcceptRole);
     messageBox.exec();
 }
 
 
 void MainWindow::on_choose_clicked()
 {
-    Path = QFileDialog::getOpenFileName(this, "Choose a image file", "/", "(*.png *.jpg *.jpeg *.bmp)");
+    Path = QFileDialog::getOpenFileName(this, QString("选择一张图片"), "/", "(*.png *.bmp)");
     if (Path.isEmpty())
     {
         qDebug() << "Error";
     }
     else
     {
+        Reset();
         QFileInfo fileInfo(Path);
         path = fileInfo.path();
         fileName = fileInfo.fileName();
         suffix = fileInfo.completeSuffix();
         ui->rawfile->setText(fileName);
         ui->button->setEnabled(true);
-
         lsb.LoadImg(Path);
         max = QString::number(lsb.GetMax());
         if (mode == ENC)
@@ -98,7 +98,8 @@ void MainWindow::on_choose_clicked()
 
 void MainWindow::on_save_clicked()
 {
-    lsb.WriteImg(path + "/" + ui->name->text());
+    QString new_path = path + "/" + ui->name->text();
+    lsb.WriteImg(new_path);
 }
 
 
@@ -110,15 +111,20 @@ void MainWindow::on_button_clicked()
         QString text = ui->text->toPlainText();
         if (text == "")
         {
-            Warning("At least one word");
+            Warning("至少一个字符");
         } else {
             if (text.length() >= max.toInt())
             {
-                Warning("Words over the threshold");
+                Warning("字符过多");
             }
             lsb.SetText(text);
             lsb.Encode();
-            lsb.CoverPixel();
+            if (suffix == "png")
+            {
+                lsb.CoverPixel(PNG);
+            } else {
+                lsb.CoverPixel(DEFAULT);
+            }
             ImgShow(ui->encrypt, lsb.GetImg());
             ui->name->setText(fileName.remove(fileName.length() - suffix.length() - 1, suffix.length() + 1) + "_encrypt." + suffix);
             ui->name->setReadOnly(true);
@@ -135,7 +141,6 @@ void MainWindow::on_button_clicked()
         break;
     }
     }
-
 }
 
 
@@ -145,8 +150,8 @@ void MainWindow::on_choose1_stateChanged(int arg1)
     {
         mode = ENC;
         on_clear_clicked();
-        ui->num->setText("text to be encrypted");
-        ui->button->setText("encrypt");
+        ui->num->setText("待加密密文");
+        ui->button->setText("加密");
         ui->choose2->setChecked(false);
         Reset();
     }
@@ -159,8 +164,8 @@ void MainWindow::on_choose2_stateChanged(int arg1)
     {
         mode = DEC;
         on_clear_clicked();
-        ui->num->setText("text decrypted");
-        ui->button->setText("decrypt");
+        ui->num->setText("解密明文");
+        ui->button->setText("解密");
         ui->choose1->setChecked(false);
         Reset();
     }
